@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # --- Banco de Dados ---
+  db:
+    image: postgres:13
+    container_name: intuitive_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: intuitive_care
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # --- Backend (API + ETL) ---
+  backend:
+    build: ./backend-intuitive
+    container_name: intuitive_backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db  
+      - POSTGRES_DB=intuitive_care
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./backend-intuitive:/app  # Hot-reload se alterar código
+
+  # --- Frontend (Vue.js) ---
+  frontend:
+    build: ./frontend-intuitive
+    container_name: intuitive_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend-intuitive:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:

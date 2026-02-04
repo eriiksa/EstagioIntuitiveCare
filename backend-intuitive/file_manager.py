@@ -1,16 +1,15 @@
 import os
 import zipfile
 import shutil
-import winreg
 from pathlib import Path
 
 def setup_diretorio():
     """
-    Cria uma pasta temporária LOCAL no projeto para baixar os arquivos.
-    NÃO retorna o Desktop, para evitar acidentes de deleção.
+    Cria uma pasta temporária para downloads dentro do projeto.
+    Retorna o caminho absoluto dessa pasta.
     """
-    # Cria uma pasta 'consolidado_despesas' dentro da pasta do projeto
-    base_path = Path(__file__).parent / "consolidado_despesas"
+    # Cria 'temp_downloads' na raiz onde o script está rodando
+    base_path = Path.cwd() / "temp_downloads"
     data_path = base_path / "data"
     
     # Cria as pastas se não existirem
@@ -19,14 +18,24 @@ def setup_diretorio():
     return str(base_path)
 
 def get_desktop_real():
-    """Busca o caminho exato da Área de Trabalho no Registro do Windows (OneDrive ou Local)."""
-    try:
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")
-        desktop_path, _ = winreg.QueryValueEx(key, "Desktop")
-        return os.path.expandvars(desktop_path)
-    except Exception as e:
-        print(f"Erro ao buscar Desktop: {e}")
-        return os.path.join(os.path.expanduser("~"), "Desktop")
+    """
+    Define onde salvar o arquivo final de forma inteligente:
+    1. Se existir pasta 'Desktop' no usuário atual, usa ela.
+    2. Caso contrário (Docker/Linux Server), usa uma pasta 'output' no projeto.
+    """
+    # Tenta achar o Desktop padrão do usuário (Funciona em Windows, Mac e Linux Desktop)
+    home = Path.home()
+    desktop = home / "Desktop"
+
+    # Verifica se a pasta Desktop realmente existe
+    if desktop.exists() and desktop.is_dir():
+        return desktop
+    
+    # FALLBACK PARA DOCKER:
+    # Se não achar Desktop (ex: container Linux), cria uma pasta 'output' na raiz do projeto
+    output_folder = Path.cwd() / "output"
+    output_folder.mkdir(exist_ok=True)
+    return output_folder
 
 def extrair_zip(caminho_projeto):
     """Extrai o arquivo ZIP baixado e remove o original."""

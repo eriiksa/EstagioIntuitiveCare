@@ -1,11 +1,20 @@
-from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, Numeric
+import os
+from dotenv import load_dotenv # para rodar localmente
+from sqlalchemy import create_engine, Column, String, Integer, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from typing import Any
-DATABASE_URL = "postgresql://postgres:darkvortex@localhost:5432/intuitive_care"
+
+load_dotenv() # Carrega as variáveis do seu arquivo .env local
+
+DB_USER = os.getenv('POSTGRES_USER', 'postgres')
+DB_PASS = os.getenv('POSTGRES_PASSWORD', 'password') # Sua senha local
+DB_HOST = os.getenv('DB_HOST', 'localhost') # No Docker será 'db'
+DB_NAME = os.getenv('POSTGRES_DB', 'intuitive_care')
+
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:5432/{DB_NAME}"
 
 engine = create_engine(DATABASE_URL)
-
 # Criação da Sessão (Para realizar as operações na DB)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
