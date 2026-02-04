@@ -23,7 +23,7 @@ def listar_operadoras():
         
         resultado = repo.get_todas_operadoras(page, limit, search)
         
-        # Estrutura de resposta com metadados (Opção B do item 4.2.4 do PDF)
+        # Estrutura de resposta com metadados (item 4.2)
         return jsonify(resultado)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -40,7 +40,7 @@ def detalhes_operadora(cnpj):
 def despesas_operadora(cnpj):
     """Retorna histórico de despesas"""
     despesas = repo.get_despesas_historico(cnpj)
-    return jsonify(despesas) # Retorna lista vazia [] se não houver dados, o que é correto (Status 200)
+    return jsonify(despesas) # Retorna lista vazia [] se não houver dados (Status 200 OK) 
 
 @app.route('/api/estatisticas', methods=['GET'])
 def estatisticas_gerais():

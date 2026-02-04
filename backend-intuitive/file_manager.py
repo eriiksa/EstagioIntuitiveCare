@@ -58,10 +58,10 @@ def limpar_temporarios(caminho_base_temp):
     base_path = Path(caminho_base_temp)
     data_path = base_path / 'data'
     
-    # 1. Pega o destino correto (Desktop)
+    # Pega o destino correto (Desktop)
     desktop_root = Path(get_desktop_real())
     
-    # 2. Cria a pasta final organizada
+    # Cria a pasta final organizada
     pasta_final = desktop_root / "Output_Intuitive"
     pasta_final.mkdir(parents=True, exist_ok=True)
 

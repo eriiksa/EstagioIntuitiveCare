@@ -171,7 +171,7 @@ def carregar_operadoras(path_csv):
         df_clean = df_cad.rename(columns=mapeamento)[
             list(mapeamento.values())].copy()
 
-        # NORMALIZAÇÃO NO CADASTRO: Garante que o registro_ans tenha 6 dígitos e remove sufixos decimais DEBUG
+        # Garante que o registro_ans tenha 6 dígitos e remove sufixos decimais DEBUG
         df_clean['registro_ans'] = df_clean['registro_ans'].astype(
             str).str.strip().str.replace(r'\.0$', '', regex=True).str.zfill(6)
 

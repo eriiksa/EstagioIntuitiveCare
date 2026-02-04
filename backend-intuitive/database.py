@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from typing import Any
 
-load_dotenv() # Carrega as variáveis do seu arquivo .env local
+load_dotenv() # Carrega as variáveis do arquivo .env local
 
 DB_USER = os.getenv('POSTGRES_USER', 'postgres')
 DB_PASS = os.getenv('POSTGRES_PASSWORD', 'password') # Sua senha local

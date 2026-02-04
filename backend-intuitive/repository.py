@@ -155,7 +155,7 @@ class OperadoraRepository():
         query_str = "SELECT registro_ans, cnpj, razao_social, modalidade, uf FROM operadoras_ativas"
         params = {}
         
-        # Adiciona filtro de busca se houver (Item 4.3.1)
+        # Adiciona filtro de busca se houver (Item 4.3)
         if termo_busca:
             query_str += " WHERE razao_social ILIKE :busca OR cnpj ILIKE :busca"
             params["busca"] = f"%{termo_busca}%"
