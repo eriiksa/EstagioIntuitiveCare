@@ -6,10 +6,10 @@ Este projeto é uma solução completa de **ETL (Extração, Transformação e C
 
 ## 🛠 Tecnologias Utilizadas
 
-* **Linguagem:** **Python 3.x** (Minha escolha principal pela facilidade com manipulação de dados).
+* **Linguagem:** `Python`
 * **Automação/Scraping:** `Selenium`, `os`, `zipfile`.
-* **Banco de Dados:** **PostgreSQL** (Primeira vez utilizando, escolhido pela robustez).
-* **API:** **Flask** (Escolhido pela simplicidade para quem está começando).
+* **Banco de Dados:** ``PostgreSQL``
+* **API:** ``Flask`` 
 * **ORM:** `SQLAlchemy`.
 
 ---
