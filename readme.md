@@ -37,6 +37,36 @@ Como eu nunca havia desenvolvido uma API antes (apenas consumido), escolhi o **F
 
 * **Por que não Django/FastAPI?** O Flask é mais minimalista. Para o escopo do teste, achei melhor fazer algo simples que eu conseguisse entender e explicar, do que usar um framework complexo e me perder na configuração.
 * **Paginação:** Implementei uma paginação simples baseada em `page` e `limit` (**Offset**). Vi que era uma forma mais intuitiva para quem está começando e funcionou bem para o volume de dados.
+## 🚀 Como Executar o Projeto (Via Docker)
 
----
+A aplicação foi totalmente "dockerizada" para garantir que rode em qualquer máquina sem necessidade de configurar ambiente Python, Node.js ou Banco de Dados manualmente.
 
+### 📋 Pré-requisitos
+* **Docker** e **Docker Compose** instalados e rodando.
+
+### 🏃‍♂️ Passo a Passo
+1. Abra o terminal na raiz do projeto.
+
+   ```
+    cd projeto-intuitive
+3. Execute o comando de construção e inicialização:
+
+   ```
+   docker-compose up --build
+5. Aguarde a inicialização:
+O Docker irá baixar as dependências e subir 3 serviços: frontend, backend e db.
+
+* Um serviço automático de ETL (intuitive_etl) iniciará o download dos dados da ANS. Isso pode levar alguns minutos. Acompanhe os logs no terminal.
+  
+## 🔗 Acessando a Aplicação
+Após os containers subirem, acesse o Frontend :
+```
+http://localhost:5173
+```
+API Backend :
+```
+http://localhost:5000/api/operadoras
+```
+Banco de Dados PostgresSQL (User: postgres / Pass: password) :
+```
+localhost:5432 
