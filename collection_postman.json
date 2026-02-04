@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "e5513812-7065-455b-862c-882236528751",
+		"name": "Intuitive Care API",
+		"description": "Coleção de testes para a API de Operadoras de Saúde (Teste Técnico).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar Operadoras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/operadoras?page=1&limit=10&search=Bradesco",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"operadoras"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"description": "Número da página"
+						},
+						{
+							"key": "limit",
+							"value": "10",
+							"description": "Itens por página"
+						},
+						{
+							"key": "search",
+							"value": "Bradesco",
+							"description": "Termo de busca (Razão Social ou CNPJ)"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhes da Operadora",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/operadoras/92693118000160",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"operadoras",
+						"92693118000160"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Histórico de Despesas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/operadoras/92693118000160/despesas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"operadoras",
+						"92693118000160",
+						"despesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estatísticas Gerais",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/estatisticas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"estatisticas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

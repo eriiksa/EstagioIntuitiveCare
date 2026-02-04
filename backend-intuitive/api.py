@@ -57,13 +57,11 @@ def estatisticas_gerais():
         consistencia = repo.get_operadoras_acima_media()
         
         # Para "Top 5 Maiores Despesas Totais" (diferente de crescimento), 
-        # podemos pegar do método de UF ou criar um específico, 
-        # mas aqui vamos compor com o que já temos para economizar tempo:
         
         return jsonify({
             "top_crescimento": top_crescimento,
             "distribuicao_uf": top_uf,
-            "consistencia:": consistencia,
+            "consistencia": consistencia,
             "mensagem": "Estatísticas geradas com sucesso."
         })
     except Exception as e:
